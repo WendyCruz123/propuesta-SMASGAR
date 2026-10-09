@@ -1246,7 +1246,81 @@ export default function Home() {
       </div>
 
       {/* BARRA DE CONTROL */}
-      
+
+{/* NAVEGACIÓN PARA CELULARES Y TABLETS */}
+<div className="relative z-40 shrink-0 border-t border-white/10 bg-[#006B68] px-3 py-2.5 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] lg:hidden">
+
+  <div className="mx-auto flex w-full max-w-[600px] items-center justify-between gap-3">
+
+    {/* BOTÓN ANTERIOR */}
+    <motion.button
+      type="button"
+      onClick={previousSlide}
+      disabled={current === 0}
+      whileTap={{ scale: 0.93 }}
+      aria-label="Diapositiva anterior"
+      className="flex min-h-[48px] min-w-[110px] items-center justify-center gap-2 rounded-lg border border-white/25 bg-white/10 px-4 text-white shadow-sm transition-colors hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-35"
+    >
+      <ArrowLeft size={20} strokeWidth={2.5} />
+      <span className="text-xs font-bold">
+        Anterior
+      </span>
+    </motion.button>
+
+    {/* CONTADOR DE DIAPOSITIVAS */}
+    <div className="flex shrink-0 flex-col items-center justify-center">
+
+      <div className="flex items-baseline gap-1">
+        <span className="text-lg font-black leading-none text-white">
+          {current + 1}
+        </span>
+
+        <span className="text-xs font-semibold text-white/60">
+          / {total}
+        </span>
+      </div>
+
+      <span className="mt-1 text-[9px] font-bold uppercase tracking-[0.08em] text-white/70">
+        Diapositiva
+      </span>
+
+    </div>
+
+    {/* BOTÓN SIGUIENTE */}
+    <motion.button
+      type="button"
+      onClick={nextSlide}
+      disabled={current === total - 1}
+      whileTap={{ scale: 0.93 }}
+      aria-label="Siguiente diapositiva"
+      className="flex min-h-[48px] min-w-[110px] items-center justify-center gap-2 rounded-lg bg-white px-4 text-[#006B68] shadow-sm transition-colors hover:bg-[#e5f6f2] disabled:cursor-not-allowed disabled:opacity-35"
+    >
+      <span className="text-xs font-black">
+        Siguiente
+      </span>
+      <ArrowRight size={20} strokeWidth={2.5} />
+    </motion.button>
+
+  </div>
+
+  {/* INDICADOR DE PROGRESO */}
+  <div className="mx-auto mt-2 h-[3px] w-full max-w-[600px] overflow-hidden rounded-full bg-white/15">
+
+    <motion.div
+      animate={{
+        width: `${((current + 1) / total) * 100}%`,
+      }}
+      transition={{
+        duration: 0.4,
+        ease: "easeInOut",
+      }}
+      className="h-full rounded-full bg-[#74E2CC]"
+    />
+
+  </div>
+
+</div>
+
       {/* VENTANA DE AYUDA */}
       <AnimatePresence>
         {showHelp && (
