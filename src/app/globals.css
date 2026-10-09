@@ -1,26 +1,195 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0c1d2d;
+  --foreground: #ffffff;
+
+  /* NUEVA PALETA BASE */
+  --brand-primary: #008f89;
+  --brand-pink: #f5007b;
+  --brand-purple: #4b008f;
+  --brand-teal: #008f89;
+  --brand-gold: #f5b400;
+
+  --brand-dark: #0c1d2d;
+  --brand-surface: #102434;
+  --brand-muted: #8fa3b5;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+.presentation-root {
+  isolation: isolate;
+}
+
+.slide-surface {
+  width: 100%;
+  height: 100%;
+  isolation: isolate;
+}
+
+/* BOTONES SUPERIORES */
+.presentation-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.045);
+  color: white;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.presentation-icon-button:hover {
+  background: rgba(0, 143, 137, 0.22);
+  border-color: rgba(0, 143, 137, 0.65);
+  transform: translateY(-2px);
+}
+
+/* BOTONES DE NAVEGACIÓN */
+.presentation-nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.presentation-nav-button:not(:disabled):hover {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  transform: translateY(-2px);
+}
+
+.presentation-nav-button:disabled {
+  opacity: 0.3;
+}
+
+/* NUEVA LÍNEA SUPERIOR MULTICOLOR */
+.brand-divider {
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--brand-pink) 0%,
+    var(--brand-pink) 20%,
+    var(--brand-purple) 20%,
+    var(--brand-purple) 40%,
+    var(--brand-teal) 40%,
+    var(--brand-teal) 60%,
+    var(--brand-gold) 60%,
+    var(--brand-gold) 80%,
+    var(--brand-pink) 80%,
+    var(--brand-pink) 100%
+  );
+  flex-shrink: 0;
+}
+
+/* SI QUIERES UNA VERSIÓN MÁS DELGADA, USA ESTA CLASE EN VEZ DE LA DE ARRIBA */
+/*
+.brand-divider {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    #F5007B 0%,
+    #F5007B 20%,
+    #4B008F 20%,
+    #4B008F 40%,
+    #008F89 40%,
+    #008F89 60%,
+    #F5B400 60%,
+    #F5B400 80%,
+    #F5007B 80%,
+    #F5007B 100%
+  );
+  flex-shrink: 0;
+}
+*/
+
+::selection {
+  background: #7cddb1;
+  color: #0b3020;
+}
+
+@media (max-height: 700px) and (min-width: 1024px) {
+  .slide-surface h1,
+  .slide-surface h2 {
+    line-height: 0.98;
+  }
+
+  .slide-surface .space-y-6 {
+    gap: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
+/* Adaptación del encabezado de la presentación */
+@media (max-width: 640px) {
+  .presentation-icon-button {
+    width: 34px;
+    height: 34px;
+    padding: 7px;
+  }
+}
+
+/* Mejor comportamiento del contenido */
+.slide-surface {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
 }
